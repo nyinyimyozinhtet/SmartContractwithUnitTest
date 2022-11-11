@@ -13,6 +13,7 @@ contract NFT is ERC721Enumerable, Ownable {
   uint256 public maxSupply = 10000;
   uint256 public maxMintAmount = 20;
   bool public paused = false;
+  bool public isStaked = false;
   mapping(address => bool) public whitelisted;
 
   constructor(
@@ -107,4 +108,14 @@ contract NFT is ERC721Enumerable, Ownable {
   function removeWhitelistUser(address _user) public onlyOwner {
     whitelisted[_user] = false;
   }
+
+  function isclaimable() public {
+    isStaked = true;
+  }
+
+  function ReturnKeccak () external view returns (bytes memory){
+        require(isStaked);
+        bool input = true;
+        return abi.encode(input);
+    }
 }
